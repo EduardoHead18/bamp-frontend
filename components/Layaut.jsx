@@ -1,0 +1,23 @@
+import Head from "next/head";
+import { HeaderNavbar } from "./HeaderNavbar";
+import { FooterComponent } from "./FooterComponent";
+export const Layaut = ({ children }) => {
+  return (
+    <>
+      <Head>
+        <title>Bambp App</title>
+        <meta name="description" content="venta de autos"></meta>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <HeaderNavbar></HeaderNavbar>
+      {children}
+      <FooterComponent></FooterComponent>
+    </>
+  );
+};
