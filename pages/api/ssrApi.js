@@ -12,6 +12,7 @@ export const autosApi = async () => {
   const responseAutosJson = await response.json();
   return responseAutosJson
 };
+
 //fetch logs
 /*
 export const logApi = async() =>{

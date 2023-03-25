@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Login from "@/pages/login";
 import Modal from "./modals/modal";
+import { MyContext } from "@/pages/_app";
+import { getTokenLocalStorage } from "./utils/getTokenLocalStorage";
 
-export const NavbarSinUser = () => {
+export const NavbarComponent = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isActive, setIsActive] = useState(router.pathname);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [userLocalStorage, setUserLocalStorage] = useState({});
 
-  //funciones para abrir modal, responsive menu
-
+  const cargarLocalStorage = () => {
+    setUserLocalStorage(getTokenLocalStorage())
+  };
   const handleOpenModal = () => {
     setIsModalVisible(true);
   };
@@ -24,9 +28,13 @@ export const NavbarSinUser = () => {
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  useEffect(() => {
+    cargarLocalStorage();
+  }, []);
+
   return (
     <>
-      <div className="min-h-full mt-2 ">
+      <div className="min-h-full mt-2 sticky top-0 bg-white z-50 ">
         <nav className="bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
@@ -77,17 +85,6 @@ export const NavbarSinUser = () => {
                       Citas
                     </Link>
 
-                    <Link
-                      href={"/nosotros"}
-                      onClick={() => setIsActive("/nosotros")}
-                      className={`${
-                        isActive == "/nosotros"
-                          ? "text-gray-800 font-bold border-b-2"
-                          : "font-medium"
-                      } text-slate-800 px-3 py-2 text-sm`}
-                    >
-                      Nosotros
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -96,18 +93,19 @@ export const NavbarSinUser = () => {
                   <Link
                     onClick={handleOpenModal}
                     className="flex flex-row items-center hover:opacity-70"
-                    href={'#'}
+                    href={"#"}
                   >
                     <p className="text-slate-800 rounded-md px-3 py-2 text-sm font-medium">
-                      Iniciar sesión
+                      {userLocalStorage.email || "Iniciar sesión"}
                     </p>
-                    <Image
-                      src={"/assets/usuario.png"}
-                      width={30}
-                      height={30}
-                      alt="iniciar sesión"
-                    ></Image>
                   </Link>
+
+                  <Image
+                    src={"/assets/usuario.png"}
+                    width={30}
+                    height={30}
+                    alt="iniciar sesión"
+                  ></Image>
                   {/* modal */}
                   {isModalVisible && (
                     <Modal title="Login" onClose={handleCloseModal}>
@@ -120,6 +118,7 @@ export const NavbarSinUser = () => {
               <div className="-mr-2 flex md:hidden">
                 <button
                   onClick={handleMenuClick}
+                  href="/index"
                   id="boton"
                   type="button"
                   className="inline-flex items-center justify-center rounded-md text-black opacity-80  p-2   focus:outline-none focus:ring-2 focus:ring-slate-600 focus:ring-offset-2 "
@@ -200,17 +199,6 @@ export const NavbarSinUser = () => {
                   Citas
                 </Link>
 
-                <Link
-                  href={"/nosotros"}
-                  onClick={() => setIsActive("/nosotros")}
-                  className={`${
-                    isActive == "/nosotros"
-                      ? "text-gray-800 font-bold border-b-2"
-                      : "font-medium"
-                  } text-slate-800 px-3 block py-2 text-sm`}
-                >
-                  Nosotros
-                </Link>
               </div>
             </div>
           )}

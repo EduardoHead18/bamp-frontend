@@ -1,8 +1,27 @@
-import React from 'react'
+import { Layaut } from "@/components/Layaut";
+import { IdAutos } from "@/components/IdAutos";
 
-const AutosId = () => {
+import { useContext, useEffect, useState } from "react";
+
+const AutosId = ({ responseJson }) => {
+
+  
   return (
-    <div>AutosId</div>
-  )
-}
-export default AutosId
+    <Layaut>
+         <IdAutos responseJson={responseJson}></IdAutos>
+
+    </Layaut>
+  );
+};
+export default AutosId;
+
+export const getServerSideProps = async ({ params: { id } }) => {
+  const url = `${process.env.NEXT_PUBLIC_AUTOS_API}/${id}`;
+  const response = await fetch(url);
+  const responseJson = await response.json();
+  return {
+    props: {
+      responseJson,
+    },
+  };
+};

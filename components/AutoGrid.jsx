@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { scrollConfig } from "./ScrollReveal/scroll";
 import Link from "next/link";
+import { scrollConfig } from "./ScrollReveal/scroll";
 
 export const AutosGrid = () => {
   const [apiAutos, setApiAutos] = useState([]);
@@ -8,10 +8,9 @@ export const AutosGrid = () => {
   const fetchApi = async () => {
     const url = process.env.NEXT_PUBLIC_AUTOS_API;
     const response = await fetch(url);
-    const respondeJson = await response.json();
-    setApiAutos(respondeJson);
+    const responseJson = await response.json();
+    setApiAutos(responseJson);
   };
-  console.log(apiAutos);
 
   useEffect(() => {
     fetchApi();
@@ -31,22 +30,18 @@ export const AutosGrid = () => {
             <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
               {apiAutos.map((data) => {
                 return (
-                  <div className="group relative">
-                    <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 cursor-auto lg:aspect-none lg:h-80">
+                  <div key={data._id} className="group relative">
+                    <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200  lg:aspect-none lg:h-80">
                       <img
                         src={data.image}
-                        alt="Front of men&#039;s Basic Tee in black."
+                        alt={data.brand}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                       />
                     </div>
                     <div className="mt-4 flex justify-between">
                       <div>
-                        <h3 className="text-sm text-gray-700">
-                          <a href="#">
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0"
-                            ></span>
+                        <h3 className="text-sm  text-gray-700">
+                          <a>
                             {data.brand}
                           </a>
                         </h3>
@@ -54,14 +49,14 @@ export const AutosGrid = () => {
                           Modelo: {data.model}
                         </p>
                         <Link
-                          href={`/autos/${data.brand}`}
+                          href={`/autos/${data._id}`}
                           className="bg-gray-800 px-10 py-2 text-white"
                         >
                           Ver más
                         </Link>
                       </div>
                       <p className="text-sm font-medium text-gray-900">
-                        {data.price}
+                        {data.price} 
                       </p>
                     </div>
                   </div>

@@ -7,7 +7,6 @@ import { scrollConfig } from "@/components/ScrollReveal/scroll";
 export default function Home() {
   //configScroll
 
-
   useEffect(() => {
     scrollConfig();
   }, []);
@@ -20,7 +19,7 @@ export default function Home() {
             <h2 className="mx-auto max-w-2xl mb-5  px-4  sm:px-6 lg:max-w-7xl lg:px-8 text-3xl font-bold tracking-tight text-gray-900">
               EL PLACER DE CONDUCIR
             </h2>
-            <p className="mx-auto max-w-2xl px-4 text-justify font-light sm:px-6 lg:max-w-7xl lg:px-8 text-lg">
+            <p className="mx-auto max-w-2xl text-gray-800 px-4 text-justify lg:text-2xl sm:px-6 lg:max-w-7xl lg:px-8 text-lg">
               Al igual que los autos de gama alta, nuestras vidas también
               merecen el mejor rendimiento. <br></br>Acelera hacia tus sueños y
               alcanza la grandeza con pasión, determinación y un espíritu
@@ -29,8 +28,9 @@ export default function Home() {
 
             <div className="mt-6  ">
               <div className="group relative">
-                <div className="mt-8 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden  bg-gray-200  lg:aspect-none lg:h-80">
+                <div className="animacion-left mt-8 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden  bg-gray-200  lg:aspect-none lg:h-80">
                   <Image
+                    alt="bmw - bamp"
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     src={"/assets/banner.jpg"}
                     width={10000}
@@ -58,12 +58,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="p-20">
+          <AutosGrid></AutosGrid>
+        </div>
 
-        <AutosGrid></AutosGrid>
-
-        <div className="animacion mt-24 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden  bg-gray-200  lg:aspect-none lg:h-80">
+        <div className="mt-24 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden  bg-gray-200  lg:aspect-none lg:h-80">
           <Image
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+            alt="mercedes benz - banm"
+            className="animacion h-full w-full object-cover object-center lg:h-full lg:w-full"
             src={"/assets/mercedes-banner.jpg"}
             width={2000}
             height={2000}

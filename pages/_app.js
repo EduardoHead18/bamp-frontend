@@ -1,11 +1,13 @@
 import "@/styles/globals.css";
-import UserLoggedIn from "./context/ApiContext";
+import { createContext, useState } from "react";
+
+export const MyContext = createContext({});
 
 export default function App({ Component, pageProps }) {
-  const userLogged = true
+  const [dataUser, setDataUser] = useState({});
   return (
-    <UserLoggedIn.Provider value={userLogged}>
+    <MyContext.Provider value={{ dataUser, setDataUser }}>
       <Component {...pageProps} />
-    </UserLoggedIn.Provider>
+    </MyContext.Provider>
   );
 }

@@ -1,12 +1,12 @@
-import { Layaut } from '@/components/Layaut'
-import React from 'react'
+import { CitasLayaut } from "@/components/CitasLayaut";
+import { Layaut } from "@/components/Layaut";
 
 const citas = () => {
   return (
     <Layaut>
-        citas
+      <CitasLayaut></CitasLayaut>
     </Layaut>
-  )
-}
+  );
+};
 
-export default citas
+export default citas;
