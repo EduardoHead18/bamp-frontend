@@ -212,6 +212,45 @@ export const NavbarComponent = () => {
                 >
                   Citas
                 </Link>
+
+                {/**text */}
+                <div className="ml-4 flex justify-between items-center md:ml-6 px-5">
+                  <Link
+                    onClick={handleOpenModal}
+                    className="flex flex-row items-center hover:opacity-70"
+                    href={"#"}
+                  >
+                    <p className="text-slate-800 rounded-md px-3 py-2 text-sm font-medium">
+                      {userLocalStorage.email || "Iniciar sesión"}
+                    </p>
+                  </Link>
+                  {userLocalStorage.email ? (
+                    <Link onClick={handleClickLogout} href={'/'} className="flex flex-row items-center hover:opacity-70">
+                    <Image
+                      src={"/assets/logout.png"}
+                      width={25}
+                      height={25}
+                      alt="logout bamp"
+                    ></Image>
+                    </Link>
+                  ) : (
+                    
+                      <Image
+                        src={"/assets/usuario.png"}
+                        width={30}
+                        height={30}
+                        alt="iniciar sesión"
+                      />
+                  )}
+
+                  {/* modal */}
+                  {isModalVisible && (
+                    <Modal title="Login" onClose={handleCloseModal}>
+                      {/* contenido del modal */}
+                      <Login onClose={handleCloseModal}></Login>
+                    </Modal>
+                  )}
+                </div>
               </div>
             </div>
           )}

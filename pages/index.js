@@ -58,7 +58,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="p-20">
+        <div className="p-17">
           <AutosGrid></AutosGrid>
         </div>
 
