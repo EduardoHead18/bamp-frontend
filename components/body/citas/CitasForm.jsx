@@ -1,7 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getTokenLocalStorage } from "./utils/getTokenLocalStorage";
+import { getTokenLocalStorage } from "../../utils/getTokenLocalStorage";
 export const CitasForm = (props) => {
   const {onClose} = props;
   const fecha = new Date().toLocaleString();
@@ -30,8 +29,7 @@ export const CitasForm = (props) => {
       const data = await response.json();
       const dataObjet = data.find(
         (res) =>
-          userLocalStorage.email === res.email &&
-          userLocalStorage.password === res.password
+          userLocalStorage.email === res.email
       );
       setUserDataApi(dataObjet);
       console.log(userDataApi);

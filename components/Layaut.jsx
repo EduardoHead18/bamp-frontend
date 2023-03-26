@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { HeaderNavbar } from "./HeaderNavbar";
-import { FooterComponent } from "./FooterComponent";
+import { HeaderNavbar } from "./header/HeaderNavbar";
+import { FooterComponent } from "./footer/FooterComponent";
 import DataProviderApp from "@/pages/context/DataProvider";
 export const Layaut = ({ children }) => {
   return (

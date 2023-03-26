@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { Layaut } from "@/components/Layaut";
-import { AutosGrid } from "@/components/AutoGrid";
+import { AutosGrid } from "@/components/body/autos/AutoGrid";
 import { scrollConfig } from "@/components/ScrollReveal/scroll";
 
 export default function Home() {

@@ -1,4 +1,4 @@
-import { AutosGrid } from "@/components/AutoGrid";
+import { AutosGrid } from "@/components/body/autos/AutoGrid";
 import { Layaut } from "@/components/Layaut";
 import React from "react";
 

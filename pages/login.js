@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useContext } from "react";
-import { MyContext } from "./_app";
+import { useEffect, useState } from "react";
 import { getTokenLocalStorage } from "@/components/utils/getTokenLocalStorage";
 
 const Login = (props) => {
@@ -21,9 +20,6 @@ const Login = (props) => {
   //estado para la animacion de loading
   const [loading, setLoading] = useState(false);
   //send token
-  const [tokenUser, setTokenUser] = useState();
-  //useContext para cambiar el valor del estado global (para saber si el usuario esta logueado o no)
-  const { dataUser, setDataUser } = useContext(MyContext);
   const [userLocalStorage, setUserLocalStorage] = useState({});
 
   //recuperar token de localstorage
@@ -90,6 +86,8 @@ const Login = (props) => {
       setTimeout(() => {
         onClose();
         enviarLog()
+        router.push('/')
+        router.reload()
       }, 2000);
     }
   };
@@ -116,52 +114,6 @@ const Login = (props) => {
       console.error("Error en la solicitud");
     }
   };
-
-  //validar login
-  /*
-  const validarUsuario = async () => {
-    //funcion para verificar el usuario y enviar el log a la bd
-    try {
-      //consumir api
-      const user = userApi.find(
-        (res) => email === res.email && pass === res.password
-      );
-      if (user) {
-        setEmail(user.email);
-        setDataUser({ email: user.email, password: user.password });
-        //guardar email & contraseñ
-        console.log(dataUser);
-        console.log("Acceso aceptado");
-        // objeto para enviar al post
-        const dataLogPost = {
-          user: email,
-          description: `el usuario ${email} inicio sesion el dia ${fecha}`,
-        };
-        //hacer post
-        const url = process.env.NEXT_PUBLIC_LOGS_API;
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataLogPost),
-        });
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-        } else {
-          console.error("Error en la solicitud");
-        }
-        onClose();
-      } else {
-        setErrorLogin(true);
-        console.log("error al loguearse");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  */
   //handle form
   async function handleSubmit(e) {
     //ejecutar loading de carga

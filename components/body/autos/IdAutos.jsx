@@ -4,8 +4,8 @@ import Link from "next/link";
 import { scrollConfig } from "@/components/ScrollReveal/scroll";
 import { useRouter } from "next/router";
 import Modal from "@/components/modals/modal";
-import { CitasForm } from "./CitasForm";
-import { getTokenLocalStorage } from "./utils/getTokenLocalStorage";
+import { CitasForm } from "../citas/CitasForm";
+import { getTokenLocalStorage } from "../../utils/getTokenLocalStorage";
 
 export const IdAutos = ({ responseJson }) => {
   const router = useRouter();

@@ -1,5 +1,5 @@
 import { Layaut } from "@/components/Layaut";
-import { IdAutos } from "@/components/IdAutos";
+import { IdAutos } from "@/components/body/autos/IdAutos";
 
 import { useContext, useEffect, useState } from "react";
 

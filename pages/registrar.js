@@ -1,23 +1,20 @@
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import { Layaut } from "@/components/Layaut";
+import { fecha } from "@/components/utils/fecha";
+import { sendLogsCreateAccount } from "@/components/utils/sendLogs";
 
 const Registrar = () => {
   //estados
   const [errorLogin, setErrorLogin] = useState(false);
   //estados del usuario
   const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState(0);
   const [city, setCity] = useState("");
-  const [rfc, setRfc] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-
-  //handle form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  };
+  const [password, setPassword] = useState("");
 
   //obtener el nombre del form
   const handleNameChange = (e) => {
@@ -25,7 +22,7 @@ const Registrar = () => {
   };
   //obtener el appellido del form
   const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
+    setLastname(e.target.value);
   };
   //obtener el appellido del form
   const handlePhoneChange = (e) => {
@@ -35,21 +32,52 @@ const Registrar = () => {
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
-  //obtener el rfc del form
-  const handleRfcChange = (e) => {
-    setRfc(e.target.value);
-  };
   //obtener el email del form
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
   //obtener el password del form
   const handlePassChange = (e) => {
-    setPass(e.target.value);
+    setPassword(e.target.value);
   };
+
+  const createUser = async () => {
+    const objData = { name, lastname, phone, city, email, password };
+    const url = process.env.NEXT_PUBLIC_USER_API;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objData),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("cuenta creada correctamente");
+      createLog();
+    } else {
+      console.error("Error en la solicitud");
+    }
+  };
+
+  const createLog = async() => {
+    const dataLogPost = {
+      user: email,
+      description: `se creo una nueva cuenta con el email
+       ${email} el día ${fecha}`,
+    };
+    await sendLogsCreateAccount(dataLogPost);
+  };
+
+  //handle form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    createUser();
+  };
+
   return (
-    <>
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <Layaut>
+      <div className="flex min-h-full items-center justify-center py-5 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div className="">
             <Image
@@ -86,170 +114,126 @@ const Registrar = () => {
               defaultValue="true"
             />
             <div className="grid grid-cols-2 gap-4">
-                {/**nombre */}
-            <div className="-space-y-px rounded-md shadow-sm">
+              {/**nombre */}
+              <div className="-space-y-px rounded-md shadow-sm">
                 <p className="mb-2 opacity-80">Nombre:</p>
-              <div className="mb-5">
-                <label htmlFor="text" className="sr-only bg-blue-300">
-                  Nombre
-                </label>
-                <input
-                  id="email-address"
-                  name="nombre"
-                  onChange={handleNameChange}
-                  type="text"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Nombre"
-                />
+                <div className="mb-5">
+                  <label htmlFor="text" className="sr-only bg-blue-300">
+                    Nombre
+                  </label>
+                  <input
+                    id="name-address"
+                    name="nombre"
+                    onChange={handleNameChange}
+                    type="text"
+                    autoComplete="email"
+                    required
+                    className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Nombre"
+                  />
+                </div>
               </div>
-            </div>
-            {/**apellidos */}
-            <div className="-space-y-px rounded-md shadow-sm">
-            <p className="mb-2 opacity-80">Apellidos:</p>
-              <div className="mb-5">
-                <label htmlFor="text" className="sr-only bg-blue-300">
-                  Apellidos
-                </label>
-                <input
-                  id="email-address"
-                  name="apellido"
-                  onChange={handleLastNameChange}
-                  type="text"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Apellidos"
-                />
+              {/**apellidos */}
+              <div className="-space-y-px rounded-md shadow-sm">
+                <p className="mb-2 opacity-80">Apellidos:</p>
+                <div className="mb-5">
+                  <label htmlFor="text" className="sr-only bg-blue-300">
+                    Apellidos
+                  </label>
+                  <input
+                    id="lastName-address"
+                    name="apellido"
+                    onChange={handleLastNameChange}
+                    type="text"
+                    autoComplete="email"
+                    required
+                    className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Apellidos"
+                  />
+                </div>
               </div>
-            </div>
-            {/**telefono */}
-            <div className="-space-y-px rounded-md shadow-sm">
-            <p className="mb-2 opacity-80">Numero de Telefono:</p>
-              <div className="mb-5">
-                <label htmlFor="number" className="sr-only bg-blue-300">
-                  Telefono
-                </label>
-                <input
-                  id="email-address"
-                  name="telefono"
-                  onChange={handlePhoneChange}
-                  type="text"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Numero de Telefono"
-                  max={10}
-                  maxLength={10}
-                  pattern="[0-9]{1,10}"
-                />
+              {/**telefono */}
+              <div className="-space-y-px rounded-md shadow-sm">
+                <p className="mb-2 opacity-80">Numero de Telefono:</p>
+                <div className="mb-5">
+                  <label htmlFor="number" className="sr-only bg-blue-300">
+                    Telefono
+                  </label>
+                  <input
+                    id="phone-address"
+                    name="telefono"
+                    onChange={handlePhoneChange}
+                    type="text"
+                    autoComplete="email"
+                    required
+                    className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Numero de Telefono"
+                    max={10}
+                    maxLength={10}
+                    pattern="[0-9]{1,10}"
+                  />
+                </div>
               </div>
-            </div>
-            {/**ciudad */}
-            <div className="-space-y-px rounded-md shadow-sm">
-            <p className="mb-2 opacity-80">Ciudad</p>
-              <div className="mb-5">
-                <label htmlFor="text" className="sr-only bg-blue-300">
-                  Telefono
-                </label>
-                <input
-                  id="email-address"
-                  name="ciudad"
-                  onChange={handleCityChange}
-                  type="text"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Ciudad"
-                />
+              {/**ciudad */}
+              <div className="-space-y-px rounded-md shadow-sm">
+                <p className="mb-2 opacity-80">Ciudad</p>
+                <div className="mb-5">
+                  <label htmlFor="text" className="sr-only bg-blue-300">
+                    Telefono
+                  </label>
+                  <input
+                    id="city-address"
+                    name="ciudad"
+                    onChange={handleCityChange}
+                    type="text"
+                    autoComplete="email"
+                    required
+                    className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Ciudad"
+                  />
+                </div>
               </div>
-            </div>
-            {/**RFC */}
-            <div className="-space-y-px rounded-md shadow-sm">
-            <p className="mb-2 opacity-80">RFC</p>
-              <div className="mb-5">
-                <label htmlFor="text" className="sr-only bg-blue-300">
-                  RFC
-                </label>
-                <input
-                  id="email-address"
-                  name="rfc"
-                  onChange={handleRfcChange}
-                  type="text"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="RFC"
-                  minLength={10}
-                />
+              {/**Email */}
+              <div className="-space-y-px rounded-md shadow-sm">
+                <p className="mb-2 opacity-80">Email</p>
+                <div className="mb-5">
+                  <label htmlFor="email" className="sr-only bg-blue-300">
+                    email
+                  </label>
+                  <input
+                    id="email-address"
+                    name="email"
+                    onChange={handleEmailChange}
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Email"
+                  />
+                </div>
               </div>
-            </div>
-            {/**Email */}
-            <div className="-space-y-px rounded-md shadow-sm">
-            <p className="mb-2 opacity-80">Email</p>
-              <div className="mb-5">
-                <label htmlFor="email" className="sr-only bg-blue-300">
-                  email
-                </label>
-                <input
-                  id="email-address"
-                  name="email"
-                  onChange={handleEmailChange}
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Email"
-                />
+              {/**Password */}
+              <div className="-space-y-px rounded-md shadow-sm ">
+                <p className="mb-2 opacity-80">Contraseña:</p>
+                <div className="mb-5">
+                  <label htmlFor="password" className="sr-only bg-blue-300">
+                    password
+                  </label>
+                  <input
+                    id="password-address"
+                    name="password"
+                    onChange={handlePassChange}
+                    type="password"
+                    autoComplete="email"
+                    required
+                    minLength={8}
+                    className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Contraseña"
+                  />
+                </div>
               </div>
-            </div>
-            {/**Password */}
-            <div className="-space-y-px rounded-md shadow-sm col-span-2">
-            <p className="mb-2 opacity-80">Contraseña:</p>
-              <div className="mb-5">
-                <label htmlFor="password" className="sr-only bg-blue-300">
-                  password
-                </label>
-                <input
-                  id="email-address"
-                  name="password"
-                  onChange={handlePassChange}
-                  type="password"
-                  autoComplete="email"
-                  required
-                  className="relative rounded-none block w-full px-4  py-1.5  ring-1 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Contraseña"
-                />
-              </div>
-            </div>
             </div>
 
-            <div className="flex flex-row items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
             <a>
               {errorLogin != false ? (
                 <p>Error al loguearse, revise su contraseña</p>
@@ -270,7 +254,7 @@ const Registrar = () => {
           </form>
         </div>
       </div>
-    </>
+    </Layaut>
   );
 };
 

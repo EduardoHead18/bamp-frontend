@@ -1,11 +1,10 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Login from "@/pages/login";
-import Modal from "./modals/modal";
-import { MyContext } from "@/pages/_app";
-import { getTokenLocalStorage } from "./utils/getTokenLocalStorage";
+import Modal from "../modals/modal";
+import { getTokenLocalStorage } from "../utils/getTokenLocalStorage";
 
 export const NavbarComponent = () => {
   const router = useRouter();
@@ -15,7 +14,7 @@ export const NavbarComponent = () => {
   const [userLocalStorage, setUserLocalStorage] = useState({});
 
   const cargarLocalStorage = () => {
-    setUserLocalStorage(getTokenLocalStorage())
+    setUserLocalStorage(getTokenLocalStorage());
   };
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -28,6 +27,10 @@ export const NavbarComponent = () => {
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const handleClickLogout = () => {
+    localStorage.removeItem("token");
+  };
+  
   useEffect(() => {
     cargarLocalStorage();
   }, []);
@@ -84,7 +87,6 @@ export const NavbarComponent = () => {
                     >
                       Citas
                     </Link>
-
                   </div>
                 </div>
               </div>
@@ -99,13 +101,25 @@ export const NavbarComponent = () => {
                       {userLocalStorage.email || "Iniciar sesión"}
                     </p>
                   </Link>
+                  {userLocalStorage.email ? (
+                    <Link onClick={handleClickLogout} href={'/'} className="flex flex-row items-center hover:opacity-70">
+                    <Image
+                      src={"/assets/logout.png"}
+                      width={25}
+                      height={25}
+                      alt="logout bamp"
+                    ></Image>
+                    </Link>
+                  ) : (
+                    
+                      <Image
+                        src={"/assets/usuario.png"}
+                        width={30}
+                        height={30}
+                        alt="iniciar sesión"
+                      />
+                  )}
 
-                  <Image
-                    src={"/assets/usuario.png"}
-                    width={30}
-                    height={30}
-                    alt="iniciar sesión"
-                  ></Image>
                   {/* modal */}
                   {isModalVisible && (
                     <Modal title="Login" onClose={handleCloseModal}>
@@ -131,13 +145,13 @@ export const NavbarComponent = () => {
                     className="block h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     aria-hidden="true"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                     />
                   </svg>
@@ -146,13 +160,13 @@ export const NavbarComponent = () => {
                     className="hidden h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     aria-hidden="true"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
@@ -198,7 +212,6 @@ export const NavbarComponent = () => {
                 >
                   Citas
                 </Link>
-
               </div>
             </div>
           )}

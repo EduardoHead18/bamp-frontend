@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { scrollConfig } from "./ScrollReveal/scroll";
+import { scrollConfig } from "../../ScrollReveal/scroll";
 
 export const AutosGrid = () => {
   const [apiAutos, setApiAutos] = useState([]);
