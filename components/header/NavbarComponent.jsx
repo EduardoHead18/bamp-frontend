@@ -42,14 +42,15 @@ export const NavbarComponent = () => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <a className="flex-shrink-0" href="/">
+
                   <Image
                     src={"/assets/BAMP_LOGO_H.png"}
                     width={100}
                     height={200}
                     alt="Bambp Logo"
                   ></Image>
-                </div>
+                </a>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     <Link
@@ -214,13 +215,13 @@ export const NavbarComponent = () => {
                 </Link>
 
                 {/**text */}
-                <div className="ml-4 flex justify-between items-center md:ml-6 px-5">
+                <div className="ml-4 flex justify-between items-center md:ml-6 ">
                   <Link
                     onClick={handleOpenModal}
                     className="flex flex-row items-center hover:opacity-70"
                     href={"#"}
                   >
-                    <p className="text-slate-800 rounded-md px-3 py-2 text-sm font-medium">
+                    <p className="text-slate-800 rounded-md  py-2 text-sm font-medium">
                       {userLocalStorage.email || "Iniciar sesión"}
                     </p>
                   </Link>

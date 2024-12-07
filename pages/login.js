@@ -132,7 +132,7 @@ const Login = (props) => {
 
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full px-7 max-w-md space-y-8">
         <div className="">
           <Image
             className="mx-auto"
@@ -200,35 +200,10 @@ const Login = (props) => {
             </div>
           </div>
 
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me{" "}
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
-          </div>
           <a>
             {errorLogin != false ? (
               <p className="text-red-700 font-medium mt-4">
-                Error al iniciar sesión, revise su contraseña
+                Error al iniciar sesión, revise su usuario o contraseña
               </p>
             ) : (
               " "
