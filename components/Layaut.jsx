@@ -16,9 +16,11 @@ export const Layaut = ({ children }) => {
           rel="stylesheet"
         />
       </Head>
-      <HeaderNavbar></HeaderNavbar>
-      {children}
-      <FooterComponent></FooterComponent>
+      <div className="flex flex-col min-h-screen">
+        <HeaderNavbar></HeaderNavbar>
+        <main className="flex-grow">{children}</main>
+        <FooterComponent></FooterComponent>
+      </div>
     </>
   );
 };
