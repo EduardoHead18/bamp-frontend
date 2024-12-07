@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
+      <script src="https://unpkg.com/scrollreveal"></script>
         <Main />
         <NextScript />
       </body>

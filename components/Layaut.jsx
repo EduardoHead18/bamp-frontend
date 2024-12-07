@@ -10,7 +10,8 @@ export const Layaut = ({ children }) => {
         <meta name="description" content="venta de autos"></meta>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <script src="https://unpkg.com/scrollreveal"></script>
+        <link rel="icon" href="assets/BAMP_WHITE.png" type="image/x-icon" />
+        
         <link
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap"
           rel="stylesheet"
