@@ -22,7 +22,7 @@ export const AutosGrid = () => {
   return (
     <>
       <div className="animacion">
-        <div className="bg-white">
+        <div className="bg-white mt-10">
           <div className="mx-auto max-w-2xl  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-2">
               PRECIOS DE BMW, AUDI, MERCEDES BENZ Y PORSCHE.

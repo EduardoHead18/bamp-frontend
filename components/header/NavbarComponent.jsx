@@ -37,7 +37,7 @@ export const NavbarComponent = () => {
 
   return (
     <>
-      <div className="min-h-full mt-2 sticky top-0 bg-white z-50 ">
+      <div className="min-h-full mt-2 sticky top-0 bg-neutral-50 z-50 ">
         <nav className="bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
@@ -257,7 +257,7 @@ export const NavbarComponent = () => {
           )}
         </nav>
         <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"></div>
+          <div className="mx-auto  sm:px-6 lg:px-8"></div>
         </main>
       </div>
     </>
