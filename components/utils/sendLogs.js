@@ -10,9 +10,6 @@ export const sendLogsCreateAccount = async (objeto) => {
   });
   if (response.ok) {
     const data = await response.json();
-    console.log('log creado')
-    console.log(data);
   } else {
-    console.error("Error en la solicitud");
   }
 };

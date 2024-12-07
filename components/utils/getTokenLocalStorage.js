@@ -8,7 +8,6 @@ export const getTokenLocalStorage = () => {
     return tokenObj
     // resto del código que depende de la variable tokenObj
   } else {
-    console.log("sin localstorage");
     return {message:'null'}
   }
 };

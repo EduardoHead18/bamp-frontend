@@ -32,9 +32,7 @@ export const CitasForm = (props) => {
           userLocalStorage.email === res.email
       );
       setUserDataApi(dataObjet);
-      console.log(userDataApi);
     } catch (error) {
-      console.log(error);
     }
   };
   const sendCita = async () => {
@@ -54,13 +52,11 @@ export const CitasForm = (props) => {
         body: JSON.stringify(dataObject),
       });
       const responseAutosJson = await response.json();
-      console.log(`cita creada ${responseAutosJson}`);
       setTimeout(() => {
         onClose();
       }, 2000);
       
     } catch (error) {
-      console.log("error");
     }
   };
 
@@ -80,9 +76,7 @@ export const CitasForm = (props) => {
         body: JSON.stringify(dataObject),
       });
       const responseAutosJson = await response.json();
-      console.log(`log create ${responseAutosJson}`);
     } catch (error) {
-      console.log("error");
     }
   };
 

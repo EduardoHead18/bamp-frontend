@@ -61,13 +61,11 @@ const Login = (props) => {
       onClose()*/
     } else {
       setErrorLogin(true);
-      console.error(data.message);
     }
   };
   //recuperar email y password del token y mandarlo al localStorage
   const getAuthUser = async () => {
     const tokenLS = localStorage.getItem("token");
-    console.log(`token del encabezado: ${tokenLS}`);
     if (!tokenLS) {
       return; // sale de la función si el token no existe
     }
@@ -80,7 +78,6 @@ const Login = (props) => {
         },
       });
       const data = await response.json();
-      console.log(data);
       setErrorLogin(true);
     } catch (error) {
       setTimeout(() => {
@@ -109,9 +106,7 @@ const Login = (props) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
     } else {
-      console.error("Error en la solicitud");
     }
   };
   //handle form

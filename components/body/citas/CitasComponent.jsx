@@ -13,9 +13,7 @@ export const CitasComponent = (props) => {
     );
     if (dataObjet) {
       setCitasData(dataObjet);
-      console.log(`acceso a las citas de ${props.props.email}`);
     } else {
-      console.log("sin citas");
     }
   };
 

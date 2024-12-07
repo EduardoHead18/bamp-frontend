@@ -53,10 +53,7 @@ const Registrar = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log("cuenta creada correctamente");
       createLog();
-    } else {
-      console.error("Error en la solicitud");
     }
   };
 
